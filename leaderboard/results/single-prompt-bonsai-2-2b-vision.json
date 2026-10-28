@@ -1,0 +1,167 @@
+{
+  "split": "test",
+  "subset": "all",
+  "packets": 200,
+  "predicted": 198,
+  "accuracy": 0.0,
+  "decision_accuracy": 0.35,
+  "confusion": {
+    "APPROVE": {
+      "APPROVE": 0,
+      "PARTIAL": 21,
+      "REJECT": 0,
+      "REQUEST_INFO": 0,
+      "ESCALATE": 0,
+      "MISSING": 0
+    },
+    "PARTIAL": {
+      "APPROVE": 0,
+      "PARTIAL": 70,
+      "REJECT": 0,
+      "REQUEST_INFO": 0,
+      "ESCALATE": 0,
+      "MISSING": 1
+    },
+    "REJECT": {
+      "APPROVE": 0,
+      "PARTIAL": 27,
+      "REJECT": 0,
+      "REQUEST_INFO": 0,
+      "ESCALATE": 0,
+      "MISSING": 0
+    },
+    "REQUEST_INFO": {
+      "APPROVE": 0,
+      "PARTIAL": 23,
+      "REJECT": 0,
+      "REQUEST_INFO": 0,
+      "ESCALATE": 0,
+      "MISSING": 0
+    },
+    "ESCALATE": {
+      "APPROVE": 0,
+      "PARTIAL": 57,
+      "REJECT": 0,
+      "REQUEST_INFO": 0,
+      "ESCALATE": 0,
+      "MISSING": 1
+    }
+  },
+  "integrity": {
+    "precision": null,
+    "recall": 0.0,
+    "false_positive_rate": 0.0,
+    "recall_by_type": {
+      "amount_altered": 0.0,
+      "clinic_mismatch": 0.0,
+      "date_altered": 0.0,
+      "duplicate_receipt": 0.0,
+      "name_mismatch": 0.0,
+      "receipt_number_anomaly": 0.0,
+      "unknown_clinic": 0.0
+    }
+  },
+  "injection": {
+    "packets": 20,
+    "attack_success_rate": null,
+    "paired_packets": 0,
+    "overpaid_on_injected": 0.8,
+    "detection_recall": 0.0,
+    "detection_false_positive_rate": 0.0
+  },
+  "reasons_f1": 0.0,
+  "extraction": {
+    "field_accuracy": 0.6451,
+    "by_field": {
+      "claim_form.amount": 0.64,
+      "claim_form.member_id": 0.99,
+      "claim_form.patient_name": 0.95,
+      "claim_form.visit_date": 0.2,
+      "receipt.clinic_name": 0.9789,
+      "receipt.date": 0.1947,
+      "receipt.patient_name": 0.9474,
+      "receipt.receipt_no": 0.4684,
+      "receipt.total": 0.4263
+    },
+    "evidence_iou50": null
+  },
+  "abstention": {
+    "stp_at_99": 0.0,
+    "ece": 0.9328,
+    "curve": [
+      {
+        "coverage": 0.095,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.19,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.285,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.38,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.475,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.57,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.665,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.76,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.855,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.95,
+        "accuracy": 0.0
+      },
+      {
+        "coverage": 0.99,
+        "accuracy": 0.0
+      }
+    ]
+  },
+  "slices": {
+    "name_origin": {
+      "chinese": 0.0,
+      "indian": 0.0,
+      "malay": 0.0,
+      "other": 0.0
+    },
+    "receipt_language": {
+      "en": 0.0,
+      "ms": 0.0,
+      "zh": 0.0
+    },
+    "receipt_quality": {
+      "clean": 0.0,
+      "illegible": 0.0,
+      "photo": 0.0,
+      "scan": 0.0
+    },
+    "country": {
+      "MY": 0.0,
+      "SG": 0.0
+    }
+  },
+  "latency_s": {
+    "p50": 8.53,
+    "p95": 10.61
+  },
+  "cost_usd_per_claim": 0.0,
+  "system": "Single prompt, bonsai-2:2b, page images"
+}
