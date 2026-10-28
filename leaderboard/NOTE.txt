@@ -1,0 +1,1 @@
+Test split: 200 claim packets plus 20 injection twins. All systems run on one Apple M5 laptop (24 GB) with local models through Ollama, at no cost per claim.

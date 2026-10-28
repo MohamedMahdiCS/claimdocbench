@@ -1,0 +1,1 @@
+Submit your own system: run it on the test split, score it with claimdocbench evaluate, and open a pull request adding the report JSON to leaderboard/results. Generated with claimdocbench; see github.com/MohamedMahdiCS/claimdocbench.
