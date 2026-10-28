@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: Types
+        run: uv run mypy
+      - name: Tests
+        run: uv run pytest
+      - name: No paid-provider keys in the repo
+        run: |
+          if git grep -nE '(sk-ant-[A-Za-z0-9]|sk-proj-[A-Za-z0-9]|AIza[0-9A-Za-z_-]{20})' -- . ':!.github/workflows/ci.yml'; then
+            echo "Found what looks like an API key. This project runs at \$0 with local models only."; exit 1
+          fi

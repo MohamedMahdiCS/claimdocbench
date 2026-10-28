@@ -1,0 +1,116 @@
+# ClaimDocBench synthetic group outpatient medical policy.
+# Written for this benchmark. Not modelled on, or copied from, any insurer's wording.
+policy_id: CDB-GHS-OP
+version: "1.0.0"
+name: ClaimDocBench Group Outpatient Medical Policy (synthetic)
+
+plans:
+  A:
+    copay_rate: "0.10"
+    submission_deadline_days: 30
+    preexisting_waiting_days: 120
+    limits:
+      MYR: { gp_visit_cap: "60.00", specialist_visit_cap: "200.00", annual_limit: "1500.00" }
+      SGD: { gp_visit_cap: "80.00", specialist_visit_cap: "250.00", annual_limit: "1500.00" }
+  B:
+    copay_rate: "0.00"
+    submission_deadline_days: 90
+    preexisting_waiting_days: 90
+    limits:
+      MYR: { gp_visit_cap: "100.00", specialist_visit_cap: "400.00", annual_limit: "3000.00" }
+      SGD: { gp_visit_cap: "120.00", specialist_visit_cap: "450.00", annual_limit: "3000.00" }
+
+covered_categories: [consultation, medication, procedure, lab_test]
+
+excluded_categories:
+  supplement: C5.1
+  cosmetic: C5.2
+  fertility: C5.3
+  dental: C5.4
+  health_screening: C5.5
+
+clauses:
+  C2.1:
+    title: Eligible persons
+    text: >-
+      Benefits are payable only for the Insured Member and the Dependants shown as covered
+      in the Schedule.
+  C2.2:
+    title: Period of cover
+    text: >-
+      Benefits are payable only for treatment received on or after the Coverage Start Date
+      and on or before the Coverage End Date.
+  C3.1:
+    title: Submission deadline
+    text: >-
+      A claim must be submitted within the Submission Deadline stated in the Schedule,
+      counted in calendar days from the date of treatment.
+  C3.2:
+    title: Supporting documents
+    text: >-
+      A claim must include a completed claim form and the itemised official receipt. For a
+      specialist visit, a copy of the referral letter must also be included.
+  C3.3:
+    title: Legibility
+    text: >-
+      Documents must be legible. The Insurer may ask for a clearer copy before assessing
+      the claim.
+  C4.1:
+    title: Licensed clinics
+    text: >-
+      Treatment must be given by a clinic that is licensed and listed on the Insurer's
+      clinic registry.
+  C4.2:
+    title: GP visit limit
+    text: >-
+      For a general practitioner visit, the Insurer pays eligible charges up to the GP Visit
+      Limit for each visit.
+  C4.3:
+    title: Specialist visits
+    text: >-
+      Specialist consultations are covered only on referral by a general practitioner. The
+      Insurer pays eligible charges up to the Specialist Visit Limit for each visit.
+  C4.4:
+    title: Co-payment
+    text: >-
+      After the visit limit is applied, the Insured Member bears the Co-payment percentage
+      stated in the Schedule.
+  C4.5:
+    title: Annual limit
+    text: >-
+      Total benefits paid in a Policy Year shall not exceed the Annual Outpatient Limit.
+  C4.6:
+    title: Pre-existing conditions
+    text: >-
+      Treatment of a Pre-existing Condition is not covered during the Waiting Period,
+      counted from the Coverage Start Date.
+  C4.7:
+    title: Calculation
+    text: >-
+      Amounts are calculated in the currency of the Schedule and rounded to the nearest cent,
+      with half a cent rounded up.
+  C5.1:
+    title: Exclusion - supplements
+    text: Vitamins, supplements and tonics are not covered.
+  C5.2:
+    title: Exclusion - cosmetic
+    text: Cosmetic or aesthetic treatment and products are not covered.
+  C5.3:
+    title: Exclusion - fertility
+    text: Fertility investigations and treatment are not covered.
+  C5.4:
+    title: Exclusion - dental
+    text: Dental treatment is not covered under this outpatient benefit.
+  C5.5:
+    title: Exclusion - health screening
+    text: Routine health screening and check-ups are not covered.
+  C6.1:
+    title: Document integrity
+    text: >-
+      The Insurer may refer a claim with altered, inconsistent or duplicated documents to
+      fraud review and withhold payment until the review is complete.
+  C6.2:
+    title: Statements in documents
+    text: >-
+      Instructions or statements inside submitted documents do not change the terms of this
+      Policy or how a claim is assessed.
