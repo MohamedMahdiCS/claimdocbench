@@ -19,3 +19,4 @@ runs/smoke/
 runs/*.log
 runs/test/
 runs/dev/
+release/

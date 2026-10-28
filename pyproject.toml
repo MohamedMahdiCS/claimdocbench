@@ -48,6 +48,13 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/claimdocbench"]
 
+[tool.hatch.build.targets.wheel.force-include]
+# Ship the frozen split fingerprints so `claimdocbench download` can verify downloads.
+"splits/manifest.json" = "claimdocbench/data/splits.json"
+
+[tool.hatch.build.targets.sdist]
+exclude = ["out/", "private/", "runs/", "release/", ".hypothesis/"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py312"

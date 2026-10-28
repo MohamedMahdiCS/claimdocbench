@@ -52,6 +52,11 @@ def main(argv: list[str] | None = None) -> int:
     lb.add_argument("--note", default="")
     lb.add_argument("--footer", default="")
 
+    dl = sub.add_parser("download", help="download a released split and verify its hash")
+    dl.add_argument("--split", choices=["dev", "test", "heldout"], required=True)
+    dl.add_argument("--out", type=Path, default=Path("out"))
+    dl.add_argument("--tag", default="v0.1.0")
+
     args = parser.parse_args(argv)
     if args.command == "generate":
         summary = generate_split(args.split, args.n, args.seed, args.out, heldout=args.heldout)
@@ -97,6 +102,10 @@ def main(argv: list[str] | None = None) -> int:
 
         build(args.reports, args.out, args.note, args.footer)
         print(f"wrote {args.out}")
+    elif args.command == "download":
+        from claimdocbench.download import download
+
+        print(f"verified and saved to {download(args.split, args.out, args.tag)}")
     elif args.command == "baseline":
         from claimdocbench.baselines import predictions, write_jsonl
 
