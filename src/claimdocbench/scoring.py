@@ -223,11 +223,17 @@ def evaluate(
         if reason_tp + reason_fp + reason_fn
         else None
     )
+    # A system that reports no fields isn't scored on extraction (n/a, not 0%).
+    reads_fields = any(preds.get(pid, {}).get("fields") for pid in ids)
     report["extraction"] = {
         "field_accuracy": _ratio(
             sum(a for a, _ in field_hits.values()), sum(b for _, b in field_hits.values())
-        ),
-        "by_field": {k: _ratio(a, b) for k, (a, b) in sorted(field_hits.items())},
+        )
+        if reads_fields
+        else None,
+        "by_field": {k: _ratio(a, b) for k, (a, b) in sorted(field_hits.items())}
+        if reads_fields
+        else {},
         "evidence_iou50": _ratio(*evidence_hits) if evidence_hits[1] else None,
     }
     report["abstention"] = _abstention(rows)
