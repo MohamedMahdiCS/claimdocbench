@@ -166,7 +166,8 @@ def predict_packet(
         "stream": False,
         "think": False,
         "format": SCHEMA,
-        "options": {"temperature": 0, "num_ctx": 16384},
+        # num_predict stops the rare runaway answer from blocking a long run.
+        "options": {"temperature": 0, "num_ctx": 16384, "num_predict": 1200},
         "messages": [{"role": "user", "content": content, "images": images}],
     }
     req = urllib.request.Request(
