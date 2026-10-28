@@ -29,6 +29,7 @@ def main(argv: list[str] | None = None) -> int:
     ev.add_argument("--predictions", type=Path, required=True)
     ev.add_argument("--report", type=Path, help="write the full JSON report here")
     ev.add_argument("--subset", choices=["all", "smoke"], default="all")
+    ev.add_argument("--system", help="name shown on the leaderboard")
 
     base = sub.add_parser("baseline", help="write predictions from a model-free baseline")
     base.add_argument("name", choices=["approve-all", "oracle"])
@@ -37,6 +38,19 @@ def main(argv: list[str] | None = None) -> int:
 
     aud = sub.add_parser("audit", help="check planted problems are detectable")
     aud.add_argument("split_dir", type=Path)
+
+    sp = sub.add_parser("run-baseline", help="run the single-prompt baseline on a local model")
+    sp.add_argument("--model", required=True, help="Ollama model name, e.g. bonsai-2:4b")
+    sp.add_argument("--mode", choices=["vision", "ocr"], default="vision")
+    sp.add_argument("--split-dir", type=Path, required=True)
+    sp.add_argument("--out", type=Path, required=True)
+    sp.add_argument("--subset", choices=["all", "smoke"], default="all")
+
+    lb = sub.add_parser("leaderboard", help="build the static leaderboard page")
+    lb.add_argument("reports", type=Path, nargs="+")
+    lb.add_argument("--out", type=Path, default=Path("site/index.html"))
+    lb.add_argument("--note", default="")
+    lb.add_argument("--footer", default="")
 
     args = parser.parse_args(argv)
     if args.command == "generate":
@@ -53,6 +67,8 @@ def main(argv: list[str] | None = None) -> int:
         from claimdocbench.scoring import evaluate, render_markdown
 
         report = evaluate(args.split_dir, args.predictions, subset=args.subset)
+        if args.system:
+            report["system"] = args.system
         if args.report:
             args.report.parent.mkdir(parents=True, exist_ok=True)
             args.report.write_text(json.dumps(report, indent=2), encoding="utf-8")
@@ -72,6 +88,15 @@ def main(argv: list[str] | None = None) -> int:
             )
         )
         return 1 if result["problems"] else 0
+    elif args.command == "run-baseline":
+        from claimdocbench.single_prompt import run
+
+        run(args.split_dir, args.model, args.mode, args.out, subset=args.subset)
+    elif args.command == "leaderboard":
+        from claimdocbench.leaderboard import build
+
+        build(args.reports, args.out, args.note, args.footer)
+        print(f"wrote {args.out}")
     elif args.command == "baseline":
         from claimdocbench.baselines import predictions, write_jsonl
 

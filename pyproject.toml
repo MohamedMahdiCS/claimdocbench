@@ -27,6 +27,10 @@ claimdocbench = "claimdocbench.cli:main"
 [project.urls]
 Repository = "https://github.com/MohamedMahdiCS/claimdocbench"
 
+[project.optional-dependencies]
+# Apple Vision OCR for the OCR variant of the baseline (macOS only).
+ocr = ["ocrmac>=1.0; sys_platform == 'darwin'"]
+
 [dependency-groups]
 dev = [
     "hypothesis>=6.100",
@@ -62,7 +66,7 @@ plugins = ["pydantic.mypy"]
 files = ["src", "tests"]
 
 [[tool.mypy.overrides]]
-module = ["hypothesis.*"]
+module = ["hypothesis.*", "ocrmac.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
