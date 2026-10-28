@@ -1,0 +1,31 @@
+{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
+{% block style %}
+.doc { width: 760px; padding: 24px 30px; background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #111; border: 1px solid #9ca3af; }
+.title { background: #1f2937; color: #fff; padding: 8px 12px; font-weight: bold; font-size: 15px; display: flex; justify-content: space-between; }
+.sec { margin-top: 12px; border: 1px solid #d1d5db; } .sec h4 { margin: 0; padding: 5px 10px; background: #f3f4f6; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.grid { display: grid; grid-template-columns: 210px 1fr; } .grid div { padding: 6px 10px; border-top: 1px solid #e5e7eb; } .grid div:nth-child(odd) { color: #4b5563; }
+.remarks { min-height: 38px; } .decl { font-size: 11px; color: #374151; padding: 8px 10px; }
+{% endblock %}
+{% block body %}
+<div class="title"><span>GROUP OUTPATIENT CLAIM FORM</span><span>{{ form_no }}</span></div>
+<div class="sec"><h4>Section A — Member</h4><div class="grid">
+<div>Employer</div><div>{{ employer }}</div>
+<div>Member ID</div><div>{{ fld("claim_form.member_id", member_id, "hand") }}</div>
+<div>Member name</div><div>{{ fld("claim_form.member_name", member_name, "hand") }}</div>
+<div>Patient name</div><div>{{ fld("claim_form.patient_name", patient_name, "hand") }}</div>
+<div>Relationship to member</div><div>{{ fld("claim_form.relationship", relationship, "hand") }}</div></div></div>
+<div class="sec"><h4>Section B — Treatment</h4><div class="grid">
+<div>Clinic / hospital</div><div>{{ fld("claim_form.clinic_name", clinic_name, "hand") }}</div>
+<div>Date of treatment</div><div>{{ fld("claim_form.visit_date", visit_date, "hand") }}</div>
+<div>Type of visit</div><div>{{ fld("claim_form.visit_type", visit_type, "hand") }}</div>
+<div>Referred by a GP?</div><div>{{ fld("claim_form.referred", referred, "hand") }}</div>
+<div>Diagnosis</div><div>{{ fld("claim_form.diagnosis_code", diagnosis, "hand") }}</div>
+<div>Total amount claimed</div><div>{{ fld("claim_form.amount", amount, "hand") }}</div></div></div>
+<div class="sec"><h4>Section C — Payment</h4><div class="grid">
+<div>Bank</div><div>{{ bank }}</div><div>Account no.</div><div>{{ account }}</div></div></div>
+<div class="sec"><h4>Remarks</h4><div class="decl remarks">{{ fld("claim_form.remarks", remarks, "hand") }}</div></div>
+<div class="decl">I declare that the information given is true and complete, and that the attached
+receipts are original and have not been claimed elsewhere.</div>
+<div class="grid"><div>Signature</div><div><span class="hand" style="font-size:18px">{{ signature }}</span></div>
+<div>Date</div><div>{{ fld("claim_form.signed_on", signed_on, "hand") }}</div></div>
+{% endblock %}

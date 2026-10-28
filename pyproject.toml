@@ -8,6 +8,8 @@ license-files = ["LICENSE"]
 authors = [{ name = "Mohamed Mahdi" }]
 requires-python = ">=3.12"
 dependencies = [
+    "jinja2>=3.1,<4",
+    "playwright>=1.48,<2",
     "pydantic>=2.9,<3",
     "pyyaml>=6,<7",
 ]
@@ -16,6 +18,9 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Intended Audience :: Science/Research",
 ]
+
+[project.scripts]
+claimdocbench = "claimdocbench.cli:main"
 
 [project.urls]
 Repository = "https://github.com/MohamedMahdiCS/claimdocbench"

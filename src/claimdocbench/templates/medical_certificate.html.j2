@@ -1,0 +1,17 @@
+{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
+{% block style %}
+.doc { width: 600px; padding: 28px 34px; background: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #111; border: 2px solid #1e3a8a; }
+.h { text-align: center; } .h .n { font-weight: bold; font-size: 18px; color: #1e3a8a; } .t { text-align: center; font-weight: bold; margin: 16px 0; letter-spacing: 1px; text-decoration: underline; }
+.row { margin: 10px 0; line-height: 1.6; } .serial { float: right; color: #6b7280; font-size: 12px; } .sig { margin-top: 30px; }
+{% endblock %}
+{% block body %}
+<div class="serial">{{ serial }}</div>
+<div class="h"><div class="n">{{ fld("medical_certificate.clinic_name", clinic.clinic.name) }}</div><div>{{ clinic.address }}</div></div>
+<div class="t">MEDICAL CERTIFICATE / SIJIL CUTI SAKIT</div>
+<div class="row">Date: {{ fld("medical_certificate.date", date, "hand") }}</div>
+<div class="row">This is to certify that {{ fld("medical_certificate.patient_name", patient_name, "hand") }}
+was examined by me and is unfit for work for {{ fld("medical_certificate.days", days, "hand") }} day(s)
+from <span class="hand">{{ from }}</span> to <span class="hand">{{ to }}</span>.</div>
+{% if diagnosis %}<div class="row">Diagnosis: <span class="hand">{{ diagnosis }}</span></div>{% endif %}
+<div class="sig"><span class="hand">{{ doctor }}</span><br>{{ doctor }}<br>Medical Officer</div>
+{% endblock %}

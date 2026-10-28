@@ -1,0 +1,20 @@
+{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
+{% block style %}
+.doc { width: 560px; padding: 28px 32px; background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #1f2937; border: 1px solid #d1d5db; }
+.top { display: flex; justify-content: space-between; border-bottom: 3px solid #0f766e; padding-bottom: 10px; }
+.name { font-size: 18px; font-weight: bold; color: #0f766e; } .small { font-size: 11px; color: #4b5563; }
+.title { font-size: 20px; letter-spacing: 2px; text-align: right; } .meta { margin: 14px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; } th { background: #f0fdfa; text-align: left; padding: 6px; border-bottom: 1px solid #99f6e4; }
+td { padding: 6px; border-bottom: 1px solid #e5e7eb; } .r { text-align: right; } .tot td { font-weight: bold; border-top: 2px solid #0f766e; }
+{% endblock %}
+{% block body %}
+<div class="top"><div><div class="name">{{ fld("receipt.clinic_name", clinic.clinic.name) }}</div>
+<div class="small">{{ clinic.address }}<br>Tel {{ clinic.phone }} · Reg. {{ fld("receipt.registration_no", clinic.clinic.registration_no) }}</div></div>
+<div class="title">TAX INVOICE<br><span class="small">/ RECEIPT</span></div></div>
+<div class="meta"><div>Invoice no: <b>{{ fld("receipt.receipt_no", receipt_no) }}</b></div><div>Date: {{ fld("receipt.date", date) }}</div>
+<div>Patient: {{ fld("receipt.patient_name", patient_name) }}</div><div>Attending: {{ doctor }}</div></div>
+<table><tr><th>#</th><th>Description</th><th class="r">Amount</th></tr>
+{% for it in items %}<tr><td>{{ loop.index }}</td><td>{{ fld("receipt.items." ~ loop.index0 ~ ".description", it.description) }}</td><td class="r">{{ fld("receipt.items." ~ loop.index0 ~ ".amount", it.amount) }}</td></tr>{% endfor %}
+<tr class="tot"><td></td><td>Total paid ({{ payment }})</td><td class="r">{{ fld("receipt.total", total) }}</td></tr></table>
+<p class="small">This is a computer-generated receipt.</p>
+{% endblock %}
