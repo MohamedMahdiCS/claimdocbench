@@ -19,8 +19,8 @@ leaderboard toward that model's vendor.
 ## Decision
 
 Every scenario starts as structured *true facts* (`ClaimFacts`). A pure, deterministic
-reference adjudicator (`adjudicate`) applies the policy in a fixed order — eligibility →
-completeness → medical rules → benefits → integrity override — and produces the gold label.
+reference adjudicator (`adjudicate`) applies the policy in a fixed order (eligibility,
+completeness, medical rules, benefits, then the integrity override) and produces the gold label.
 Documents are rendered *from* the facts afterwards, so the label never depends on reading them.
 
 The engine is tested with unit tests for each clause and Hypothesis property tests for

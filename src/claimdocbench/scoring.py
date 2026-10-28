@@ -284,12 +284,12 @@ def _slices(rows: list[dict[str, Any]]) -> dict[str, dict[str, float | None]]:
 
 
 def _pct(v: float | None) -> str:
-    return "—" if v is None else f"{100 * v:.1f}%"
+    return "n/a" if v is None else f"{100 * v:.1f}%"
 
 
 def render_markdown(report: dict[str, Any]) -> str:
     lines = [
-        f"## ClaimDocBench — {report['split']} ({report['subset']}, {report['packets']} packets)",
+        f"## ClaimDocBench: {report['split']} ({report['subset']}, {report['packets']} packets)",
         "",
         "| Metric | Value |",
         "|---|---:|",
