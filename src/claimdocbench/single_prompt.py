@@ -14,6 +14,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import re
 import time
 import urllib.request
 from pathlib import Path
@@ -98,7 +99,12 @@ def _image_b64(path: Path) -> str:
 def _ocr_text(path: Path) -> str:
     from ocrmac import ocrmac  # macOS only; optional dependency
 
+    # English-first misreads Chinese and Chinese-first misreads English, so run both and keep
+    # the Chinese pass only when it found real Chinese text.
     results = ocrmac.OCR(str(path), language_preference=["en-US", "zh-Hans"]).recognize()
+    zh = ocrmac.OCR(str(path), language_preference=["zh-Hans", "en-US"]).recognize()
+    if len(re.findall(r"[\u4e00-\u9fff]", "".join(r[0] for r in zh))) >= 8:
+        results = zh
     # Sort top-to-bottom (Vision's y origin is the bottom edge), then left-to-right.
     results.sort(key=lambda r: (-round(r[2][1] + r[2][3], 2), r[2][0]))
     return "\n".join(r[0] for r in results)
