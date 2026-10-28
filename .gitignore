@@ -15,3 +15,5 @@ build/
 # Generated benchmark output and private held-out material
 out/
 private/
+runs/smoke/
+runs/*.log
