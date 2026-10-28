@@ -1,6 +1,6 @@
-{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
+{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld, notes %}
 {% block style %}
-.doc { width: 620px; padding: 30px 36px; background: #fffef9; font-family: Georgia, "Times New Roman", serif; font-size: 14px; color: #222; }
+.doc { width: 620px; padding: 30px 36px; background: #fffef9; font-family: Georgia, "Times New Roman", "Songti SC", serif; font-size: 14px; color: #222; }
 .head { text-align: center; border-bottom: 1px solid #333; padding-bottom: 8px; } .head .n { font-size: 22px; font-variant: small-caps; }
 .rno { color: #b91c1c; font-weight: bold; float: right; } h3 { text-align: center; letter-spacing: 3px; margin: 16px 0 10px; }
 .line { margin: 6px 0; } table { width: 100%; margin-top: 10px; border-collapse: collapse; } td { padding: 5px 4px; border-bottom: 1px dotted #888; } .r { text-align: right; }
@@ -8,11 +8,12 @@
 {% endblock %}
 {% block body %}
 <div class="head"><div class="n">{{ fld("receipt.clinic_name", clinic.clinic.name) }}</div>
-<div>{{ clinic.address }}</div><div>Telephone {{ clinic.phone }} &nbsp;|&nbsp; Registration {{ fld("receipt.registration_no", clinic.clinic.registration_no) }}</div></div>
-<h3>RECEIPT <span class="rno">No. {{ fld("receipt.receipt_no", receipt_no) }}</span></h3>
-<div class="line">Received from: {{ fld("receipt.patient_name", patient_name, "hand") }}</div>
-<div class="line">Date: {{ fld("receipt.date", date, "hand") }}</div>
+<div>{{ clinic.address }}</div><div>{{ t.tel }} {{ clinic.phone }} &nbsp;|&nbsp; {{ t.reg_no }} {{ fld("receipt.registration_no", clinic.clinic.registration_no) }}</div></div>
+<h3>{{ t.receipt }} <span class="rno">No. {{ fld("receipt.receipt_no", receipt_no) }}</span></h3>
+<div class="line">{{ t.received_from }}: {{ fld("receipt.patient_name", patient_name, "hand") }}</div>
+<div class="line">{{ t.date }}: {{ fld("receipt.date", date, "hand") }}</div>
 <table>{% for it in items %}<tr><td>{{ fld("receipt.items." ~ loop.index0 ~ ".description", it.description) }}</td><td class="r">{{ fld("receipt.items." ~ loop.index0 ~ ".amount", it.amount) }}</td></tr>{% endfor %}
-<tr><td><b>Total</b></td><td class="r"><b>{{ fld("receipt.total", total) }}</b></td></tr></table>
-<div class="sig"><span class="hand">{{ doctor }}</span><br>Authorised signature</div>
+<tr><td><b>{{ t.total }}</b></td><td class="r"><b>{{ fld("receipt.total", total) }}</b></td></tr></table>
+<div class="sig"><span class="hand">{{ doctor }}</span><br>{{ t.signature }}</div>
+{{ notes(footer_note, hidden_note) }}
 {% endblock %}

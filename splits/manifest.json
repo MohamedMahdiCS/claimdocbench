@@ -1,0 +1,55 @@
+{
+  "frozen_on": "2026-10-29",
+  "generator": "claimdocbench 0.1.0.dev0",
+  "hash_command": "claimdocbench hash <path>",
+  "splits": {
+    "dev": {
+      "seed": 101,
+      "packets": 150,
+      "twins": 18,
+      "heldout_templates": false,
+      "hashed_path": "out/dev",
+      "files": 785,
+      "sha256": "ecf5db0737f6c29eefcb46c8028c8d63bacce277c9c56a180132ea96e05307d6",
+      "decisions": {
+        "PARTIAL": 62,
+        "ESCALATE": 32,
+        "REQUEST_INFO": 13,
+        "REJECT": 24,
+        "APPROVE": 19
+      }
+    },
+    "test": {
+      "seed": 202,
+      "packets": 200,
+      "twins": 20,
+      "heldout_templates": false,
+      "hashed_path": "out/test",
+      "files": 1037,
+      "sha256": "6d706b89a9bec795d591f1cccfd511ede6c5136c0dfce44659f447f43aa18f7a",
+      "decisions": {
+        "REJECT": 27,
+        "ESCALATE": 58,
+        "PARTIAL": 71,
+        "APPROVE": 21,
+        "REQUEST_INFO": 23
+      }
+    },
+    "heldout": {
+      "seed": 303,
+      "packets": 50,
+      "twins": 1,
+      "heldout_templates": true,
+      "hashed_path": "private/ (held-out templates + heldout split)",
+      "files": 250,
+      "sha256": "f3b0fa4e905d1d28978818e601d12616f550cf45c94d343316658b2b87587aee",
+      "decisions": {
+        "PARTIAL": 16,
+        "APPROVE": 9,
+        "ESCALATE": 15,
+        "REQUEST_INFO": 5,
+        "REJECT": 5
+      }
+    }
+  }
+}

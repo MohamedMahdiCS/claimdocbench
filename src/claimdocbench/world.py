@@ -311,24 +311,40 @@ class World:
 
 def build_world(rng: random.Random, n_members: int) -> World:
     clinics: dict[str, ClinicProfile] = {}
+    names: set[str] = set()
+    prefixes: set[str] = set()
     counter = 0
+
+    def add(country: str, kind: VisitType, licensed: bool = True) -> None:
+        # Names and receipt prefixes must be unique, or honest claims would look fraudulent
+        # (a receipt matched to the wrong clinic) and some frauds would be undetectable.
+        nonlocal counter
+        counter += 1
+        while True:
+            p = _clinic_profile(rng, country, kind, counter, licensed=licensed)
+            if p.clinic.name not in names and p.receipt_prefix not in prefixes:
+                break
+        names.add(p.clinic.name)
+        prefixes.add(p.receipt_prefix)
+        clinics[p.clinic.clinic_id] = p
+
     for country in ("MY", "SG"):
         for kind, count in ((VisitType.GP, 12), (VisitType.SPECIALIST, 5)):
             for _ in range(count):
-                counter += 1
-                p = _clinic_profile(rng, country, kind, counter)
-                clinics[p.clinic.clinic_id] = p
+                add(country, kind)
         for _ in range(2):  # listed in the registry but not licensed
-            counter += 1
-            p = _clinic_profile(rng, country, VisitType.GP, counter, licensed=False)
-            clinics[p.clinic.clinic_id] = p
+            add(country, VisitType.GP, licensed=False)
     members = [_member(rng, i, rng.choice(["MY", "MY", "SG"])) for i in range(1, n_members + 1)]
     return World(members=members, clinics=clinics)
 
 
-def fabricated_clinic(rng: random.Random, country: str) -> ClinicProfile:
+def fabricated_clinic(rng: random.Random, country: str, world: World) -> ClinicProfile:
     """A clinic that is not in the registry (used for UNKNOWN_CLINIC fraud)."""
-    p = _clinic_profile(rng, country, VisitType.GP, 9000 + rng.randint(0, 999))
+    taken = {c.clinic.name for c in world.clinics.values()}
+    while True:
+        p = _clinic_profile(rng, country, VisitType.GP, 9000 + rng.randint(0, 999))
+        if p.clinic.name not in taken:
+            break
     return ClinicProfile(
         clinic=p.clinic.model_copy(update={"clinic_id": "UNREGISTERED"}),
         country=country,

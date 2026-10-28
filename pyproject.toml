@@ -9,6 +9,8 @@ authors = [{ name = "Mohamed Mahdi" }]
 requires-python = ">=3.12"
 dependencies = [
     "jinja2>=3.1,<4",
+    "numpy>=2,<3",
+    "pillow>=11,<13",
     "playwright>=1.48,<2",
     "pydantic>=2.9,<3",
     "pyyaml>=6,<7",
@@ -48,6 +50,10 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Translations legitimately use full-width CJK punctuation and long label strings.
+"src/claimdocbench/i18n.py" = ["RUF001", "E501"]
 
 [tool.mypy]
 python_version = "3.12"

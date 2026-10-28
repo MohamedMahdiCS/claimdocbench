@@ -1,6 +1,6 @@
-{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
+{% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld, notes %}
 {% block style %}
-.doc { width: 560px; padding: 28px 32px; background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #1f2937; border: 1px solid #d1d5db; }
+.doc { width: 560px; padding: 28px 32px; background: #fff; font-family: Arial, Helvetica, "PingFang SC", sans-serif; font-size: 13px; color: #1f2937; border: 1px solid #d1d5db; }
 .top { display: flex; justify-content: space-between; border-bottom: 3px solid #0f766e; padding-bottom: 10px; }
 .name { font-size: 18px; font-weight: bold; color: #0f766e; } .small { font-size: 11px; color: #4b5563; }
 .title { font-size: 20px; letter-spacing: 2px; text-align: right; } .meta { margin: 14px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; }
@@ -9,12 +9,13 @@ td { padding: 6px; border-bottom: 1px solid #e5e7eb; } .r { text-align: right; }
 {% endblock %}
 {% block body %}
 <div class="top"><div><div class="name">{{ fld("receipt.clinic_name", clinic.clinic.name) }}</div>
-<div class="small">{{ clinic.address }}<br>Tel {{ clinic.phone }} · Reg. {{ fld("receipt.registration_no", clinic.clinic.registration_no) }}</div></div>
-<div class="title">TAX INVOICE<br><span class="small">/ RECEIPT</span></div></div>
-<div class="meta"><div>Invoice no: <b>{{ fld("receipt.receipt_no", receipt_no) }}</b></div><div>Date: {{ fld("receipt.date", date) }}</div>
-<div>Patient: {{ fld("receipt.patient_name", patient_name) }}</div><div>Attending: {{ doctor }}</div></div>
-<table><tr><th>#</th><th>Description</th><th class="r">Amount</th></tr>
+<div class="small">{{ clinic.address }}<br>{{ t.tel }} {{ clinic.phone }} · {{ t.reg_no }} {{ fld("receipt.registration_no", clinic.clinic.registration_no) }}</div></div>
+<div class="title">{{ t.tax_invoice }}<br><span class="small">/ {{ t.receipt }}</span></div></div>
+<div class="meta"><div>{{ t.invoice_no }}: <b>{{ fld("receipt.receipt_no", receipt_no) }}</b></div><div>{{ t.date }}: {{ fld("receipt.date", date) }}</div>
+<div>{{ t.patient }}: {{ fld("receipt.patient_name", patient_name) }}</div><div>{{ t.attending }}: {{ doctor }}</div></div>
+<table><tr><th>#</th><th>{{ t.description }}</th><th class="r">{{ t.amount }}</th></tr>
 {% for it in items %}<tr><td>{{ loop.index }}</td><td>{{ fld("receipt.items." ~ loop.index0 ~ ".description", it.description) }}</td><td class="r">{{ fld("receipt.items." ~ loop.index0 ~ ".amount", it.amount) }}</td></tr>{% endfor %}
-<tr class="tot"><td></td><td>Total paid ({{ payment }})</td><td class="r">{{ fld("receipt.total", total) }}</td></tr></table>
-<p class="small">This is a computer-generated receipt.</p>
+<tr class="tot"><td></td><td>{{ t.total_paid }} ({{ payment }})</td><td class="r">{{ fld("receipt.total", total) }}</td></tr></table>
+<p class="small">{{ t.computer }}</p>
+{{ notes(footer_note, hidden_note) }}
 {% endblock %}

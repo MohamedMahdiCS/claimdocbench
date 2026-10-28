@@ -2,12 +2,21 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from types import TracebackType
 from typing import Any
 
-from jinja2 import Environment, PackageLoader, StrictUndefined, select_autoescape
+from jinja2 import (
+    BaseLoader,
+    ChoiceLoader,
+    Environment,
+    FileSystemLoader,
+    PackageLoader,
+    StrictUndefined,
+    select_autoescape,
+)
 from playwright.sync_api import Browser, Page, Playwright, sync_playwright
 
 from claimdocbench.documents import DocSpec
@@ -45,8 +54,12 @@ class Renderer:
     """Reuses one browser page for every document. Use as a context manager."""
 
     def __init__(self) -> None:
+        loaders: list[BaseLoader] = [PackageLoader("claimdocbench", "templates")]
+        private = Path(os.environ.get("CLAIMDOCBENCH_PRIVATE_TEMPLATES", "private/templates"))
+        if private.is_dir():  # held-out layouts, kept out of the public repo until the reveal
+            loaders.append(FileSystemLoader(str(private)))
         self.env = Environment(
-            loader=PackageLoader("claimdocbench", "templates"),
+            loader=ChoiceLoader(loaders),
             autoescape=select_autoescape(["html", "j2"]),
             undefined=StrictUndefined,
         )

@@ -1,15 +1,14 @@
 {% extends "_base.html.j2" %}{% from "_macros.html.j2" import fld %}
 {% block style %}
-.doc { width: 640px; padding: 32px 40px; background: #fff; font-family: "Times New Roman", Times, serif; font-size: 15px; color: #111; }
+.doc { width: 640px; padding: 32px 40px; background: #fff; font-family: "Times New Roman", Times, "Songti SC", serif; font-size: 15px; color: #111; }
 .lh { border-bottom: 2px solid #444; padding-bottom: 8px; margin-bottom: 18px; } .lh .n { font-size: 20px; font-weight: bold; }
 p { line-height: 1.55; } .sig { margin-top: 28px; }
 {% endblock %}
 {% block body %}
 <div class="lh"><div class="n">{{ fld("referral_letter.from_clinic", clinic.clinic.name) }}</div><div>{{ clinic.address }} · {{ clinic.phone }}</div></div>
-<div>Date: {{ fld("referral_letter.date", date) }}</div>
-<p>To: The Consultant,<br>{{ fld("referral_letter.to_clinic", to_clinic) }}</p>
-<p><b>RE: REFERRAL — {{ fld("referral_letter.patient_name", patient_name) }}</b></p>
-<p>Dear Doctor, I would be grateful if you could kindly review the above patient for
-{{ reason | lower }}. Thank you for your assistance.</p>
-<div class="sig">Yours sincerely,<br><span class="hand">{{ doctor }}</span><br>{{ doctor }}</div>
+<div>{{ t.date }}: {{ fld("referral_letter.date", date) }}</div>
+<p>{{ t.ref_to }}<br>{{ fld("referral_letter.to_clinic", to_clinic) }}</p>
+<p><b>{{ t.ref_re }} — {{ fld("referral_letter.patient_name", patient_name) }}</b></p>
+<p>{{ t.ref_body }} {{ reason | lower if lang != "zh" else reason }}. {{ t.ref_thanks }}</p>
+<div class="sig">{{ t.ref_sign }}<br><span class="hand">{{ doctor }}</span><br>{{ doctor }}</div>
 {% endblock %}

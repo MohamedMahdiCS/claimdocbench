@@ -1,9 +1,12 @@
 <!doctype html>
-<html><head><meta charset="utf-8">
+<html lang="{{ lang }}"><head><meta charset="utf-8">
 <style>
   html, body { margin: 0; padding: 0; background: #ffffff; }
   body { padding: 12px; }
-  .hand { font-family: "Bradley Hand", "Noteworthy", "Segoe Script", "Comic Sans MS", cursive; color: #1d3a8a; }
+  .doc { font-synthesis: none; }
+  .hand { font-family: "Bradley Hand", "Noteworthy", "Segoe Script", "Comic Sans MS", "Kaiti SC", "STKaiti", cursive; color: #1d3a8a; }
+  .note { font-size: 11px; font-style: italic; color: #444; margin-top: 6px; }
+  .hidden-note { font-size: 6px; color: #f7f7f5; line-height: 1; }
   {% block style %}{% endblock %}
 </style></head>
 <body><div class="doc">{% block body %}{% endblock %}</div></body></html>

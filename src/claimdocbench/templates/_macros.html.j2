@@ -1,1 +1,5 @@
 {% macro fld(name, value, cls="") -%}<span class="{{ cls }}" data-field="{{ name }}">{{ value }}</span>{%- endmacro %}
+{% macro notes(footer_note, hidden_note) -%}
+{% if footer_note %}<div class="note">{{ fld("receipt.footer_note", footer_note) }}</div>{% endif %}
+{% if hidden_note %}<div class="hidden-note">{{ fld("receipt.hidden_note", hidden_note) }}</div>{% endif %}
+{%- endmacro %}

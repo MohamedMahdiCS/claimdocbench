@@ -81,3 +81,7 @@ def test_generate_split_writes_packets_without_answers(tmp_path: Path) -> None:
                 assert w > 0 and h > 0
                 assert x + w <= doc["size"][0] + 2 and y + h <= doc["size"][1] + 2
     assert (root / "context" / "clinics.json").exists()
+
+    from claimdocbench.audit import audit_split
+
+    assert audit_split(root)["problems"] == []
