@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClaimDocBench leaderboard</title>
+<style>
+:root { --bg:#fbfaf7; --fg:#1c1b19; --muted:#6b6862; --line:#e4e1da; --accent:#0f766e; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#161614; --fg:#ecebe7; --muted:#a3a19b; --line:#2e2d2a; --accent:#5eead4; }
+}
+body { margin:0; background:var(--bg); color:var(--fg);
+  font:15px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width:1100px; margin:0 auto; padding:32px 16px 64px; }
+h1 { font-size:26px; margin:0 0 4px; } p { color:var(--muted); margin:6px 0; }
+a { color:var(--accent); }
+.wrap { overflow-x:auto; margin-top:24px; border:1px solid var(--line); border-radius:10px; }
+table { border-collapse:collapse; width:100%; min-width:860px; font-size:14px; }
+th, td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:right;
+  white-space:nowrap; }
+th:first-child, td:first-child { text-align:left; }
+th { font-weight:600; color:var(--muted); font-size:12px; }
+tr:last-child td { border-bottom:0; } .note { font-size:13px; }
+</style></head>
+<body><main>
+<h1>ClaimDocBench leaderboard</h1>
+<p>leaderboard/NOTE.txt</p>
+<p>Accuracy counts a claim as correct only when the decision and the payout (to the cent) are
+both right. Attack success is paired: the injected claim was decided in the attacker's
+favour while its injection-free twin was handled correctly.</p>
+<div class="wrap"><table>
+<thead><tr><th>System</th><th>Accuracy</th><th>Decision</th><th>Fraud recall</th>
+<th>Fraud precision</th><th>False alarms</th><th>Attack success</th><th>Fields read</th>
+<th>STP@99</th><th>p50 latency</th><th>Cost / claim</th></tr></thead>
+<tbody>
+<tr><td>OpenAdjuster v1 (bonsai-2:4b)</td><td>90.7%</td><td>91.3%</td><td>100.0%</td><td>72.7%</td><td>10.2%</td><td>0.0%</td><td>92.2%</td><td>72.0%</td><td>57.4s</td><td>$0.00</td></tr>
+<tr><td>Approve everything (no model)</td><td>10.5%</td><td>10.5%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>$0.00</td></tr>
+<tr><td>Single prompt, bonsai-2:4b, page images</td><td>9.5%</td><td>12.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>85.5%</td><td>0.0%</td><td>22.3s</td><td>$0.00</td></tr>
+<tr><td>Single prompt, bonsai-2:4b, OCR text</td><td>3.0%</td><td>33.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>83.7%</td><td>0.0%</td><td>14.5s</td><td>$0.00</td></tr>
+<tr><td>Single prompt, bonsai-2:2b, page images</td><td>0.0%</td><td>35.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>64.5%</td><td>0.0%</td><td>8.5s</td><td>$0.00</td></tr>
+</tbody></table></div>
+<p class="note">leaderboard/FOOTER.txt</p>
+</main></body></html>
