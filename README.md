@@ -89,7 +89,7 @@ Two checks keep the data honest:
 |---|---:|---|
 | `dev` | 150 | Build and tune. `smoke` is a fixed 25-packet subset |
 | `test` | 200 | Reported results |
-| `heldout` | 50 | Three document layouts that appear nowhere else. Kept private and committed by SHA-256 in [`splits/manifest.json`](splits/manifest.json) before any system was tuned, to be released later so the hash can be checked |
+| `heldout` | 50 | Three document layouts that appear nowhere else. Committed by SHA-256 in [`splits/manifest.json`](splits/manifest.json) before any system was tuned, then [released](https://github.com/MohamedMahdiCS/claimdocbench/releases/tag/v0.2.0-heldout) so the hash can be checked |
 
 ## Quick start
 

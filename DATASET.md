@@ -37,7 +37,7 @@ Everything is invented. No real person, clinic, receipt or medical record is in 
 |---|---:|---:|---|
 | `dev` | 150 | 18 | For building and tuning. `smoke` is a fixed 25-packet subset |
 | `test` | 200 | 20 | For reported results |
-| `heldout` | 50 | 1 | Three document layouts used nowhere else. Fingerprint committed before any system was tuned; released later |
+| `heldout` | 50 | 1 | Three document layouts used nowhere else. Fingerprint committed before any system was tuned; [released](https://github.com/MohamedMahdiCS/claimdocbench/releases/tag/v0.2.0-heldout) after the final runs |
 
 Injection twins are copies of injected packets with the injection removed and everything else
 identical. They are used to measure whether an injection changed a system's decision.

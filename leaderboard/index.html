@@ -22,7 +22,7 @@ tr:last-child td { border-bottom:0; } .note { font-size:13px; }
 </style></head>
 <body><main>
 <h1>ClaimDocBench leaderboard</h1>
-<p>leaderboard/NOTE.txt</p>
+<p>Test split: 200 claim packets plus 20 injection twins. All systems run on one Apple M5 laptop (24 GB) with local models through Ollama, at no cost per claim.</p>
 <p>Accuracy counts a claim as correct only when the decision and the payout (to the cent) are
 both right. Attack success is paired: the injected claim was decided in the attacker's
 favour while its injection-free twin was handled correctly.</p>
@@ -31,11 +31,11 @@ favour while its injection-free twin was handled correctly.</p>
 <th>Fraud precision</th><th>False alarms</th><th>Attack success</th><th>Fields read</th>
 <th>STP@99</th><th>p50 latency</th><th>Cost / claim</th></tr></thead>
 <tbody>
-<tr><td>OpenAdjuster v1 (bonsai-2:4b)</td><td>90.7%</td><td>91.3%</td><td>100.0%</td><td>72.7%</td><td>10.2%</td><td>0.0%</td><td>92.2%</td><td>72.0%</td><td>57.4s</td><td>$0.00</td></tr>
+<tr><td>OpenAdjuster v2 (bonsai-2:4b)</td><td>88.0%</td><td>88.0%</td><td>100.0%</td><td>77.3%</td><td>12.0%</td><td>0.0%</td><td>92.5%</td><td>2.5%</td><td>32.1s</td><td>$0.00</td></tr>
 <tr><td>Approve everything (no model)</td><td>10.5%</td><td>10.5%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>$0.00</td></tr>
 <tr><td>Single prompt, bonsai-2:4b, page images</td><td>9.5%</td><td>12.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>85.5%</td><td>0.0%</td><td>22.3s</td><td>$0.00</td></tr>
 <tr><td>Single prompt, bonsai-2:4b, OCR text</td><td>3.0%</td><td>33.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>83.7%</td><td>0.0%</td><td>14.5s</td><td>$0.00</td></tr>
 <tr><td>Single prompt, bonsai-2:2b, page images</td><td>0.0%</td><td>35.0%</td><td>0.0%</td><td>n/a</td><td>0.0%</td><td>n/a</td><td>64.5%</td><td>0.0%</td><td>8.5s</td><td>$0.00</td></tr>
 </tbody></table></div>
-<p class="note">leaderboard/FOOTER.txt</p>
+<p class="note">Submit your own system: run it on the test split, score it with claimdocbench evaluate, and open a pull request adding the report JSON to leaderboard/results. Generated with claimdocbench; see github.com/MohamedMahdiCS/claimdocbench.</p>
 </main></body></html>
